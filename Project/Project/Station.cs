@@ -8,17 +8,20 @@ namespace Project
 {
     internal class Station
     {
-        private String SName;
-        private bool Stop;
+        private String SName;//namne of station 
+        private bool Stop;//determines if train will stop at this station
         public Station(String line)
         {
-            string[] SplitLine = line.Split(',');
+            //convert input strings to station name(SName var) and Stop var  
+            string[] SplitLine = line.Split(',');//used to seperated input string into components  
+            //a check for input file formatted correctly 
             if (SplitLine.Length != 2)
             {
                 Console.WriteLine("input file formatted incorrectly");
                 System.Environment.Exit(1);
             }
-            SName = SplitLine[0].Trim();
+            SName = SplitLine[0].Trim();//remove white space from inputs 
+            //convert string true and false values to bool 
             if (SplitLine[1].Trim() == "True")
             {
                 Stop = true;
@@ -27,18 +30,18 @@ namespace Project
             {
                 Stop = false;
             }
-            else {
+            else 
+            {
                 Console.WriteLine("input file formatted incorrectly");
                 System.Environment.Exit(1);
             }
-            //Console.WriteLine(SName);
-            //Console.WriteLine(Stop);
         }
-
+        //GetSname is a getter for SName var
         public string GetSName()
         {
             return SName;
         }
+        //GetStop is a getter for Stop var
         public bool GetStop()
         {
             return Stop;

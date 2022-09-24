@@ -7,23 +7,15 @@ namespace Project
     {
         static void Main(string[] args)
         {
-            //get text from input file 
+            //get input file name from arguments / check for single input 
             if (args.Length != 1)
-            {
-                //Console.WriteLine("incorrect number of input arguments");
                 System.Environment.Exit(1);
-            }
-            else 
-            {
-                //Console.WriteLine("Reading input from " + args[0] + " file.\n");
-            }
+            //convert text files to string array seperated by \n in lines variable
             string[] lines = File.ReadAllLines(args[0]);
-            //end of get text from input 
-
-            //get stations from input file or create train object 
+            //pass lines into train object/class 
             Train train = new Train(lines);
+            //runTrain func will print msg to console 
             train.runTrain();
-            //end of get stations from input file 
         }
     }
 }

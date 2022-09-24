@@ -1,2 +1,5 @@
 Central, True 
 Roma St, True
+S1, True
+S2, True
+S3, True

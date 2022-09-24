@@ -1,0 +1,10 @@
+Central, False 
+Roma St, True
+South Brisbane, False 
+South Bank, True 
+S1, False 
+S2, True
+S3, False 
+S4, False 
+S5, True 
+S6, False 
