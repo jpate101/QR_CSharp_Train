@@ -53,16 +53,31 @@ namespace Project
                 System.Environment.Exit(1);
             }
             String[][] comExp = comExpression();
-            for (int i = 0; i < comExp[0].Length; i++)
+            int i;
+            for (i = 0; i < comExp[0].Length-1; i++)
             {
                 if (i == 0) 
                 {
-                    Console.WriteLine("This train runs express from " + comExp[0][i] + " to " + comExp[2][i] + ", stopping only at " + comExp[1][i]);
+                    Console.WriteLine("This train runs express from " + comExp[0][i] + " to " + comExp[2][i] + ", stopping only at " + comExp[1][i]+",");
                 } 
                 else 
                 {
-                    Console.WriteLine("then this train runs express from " + comExp[0][i] + " to " + comExp[2][i] + ", stopping only at " + comExp[1][i]);
+                    Console.WriteLine("then this train runs express from " + comExp[0][i] + " to " + comExp[2][i] + ", stopping only at " + comExp[1][i]+",");
                 }
+            }
+            if (comExp[1][i] == null && comExp[2][i] == null)
+            {
+                Console.WriteLine("then this train runs express to " + comExp[0][i]);
+                System.Environment.Exit(1);
+            }
+            else if (comExp[2][i] == null)
+            {
+                Console.WriteLine("then this train runs express from " + comExp[0][i] + " to " + comExp[1][i]);
+                System.Environment.Exit(1);
+            }
+            else 
+            {
+                System.Environment.Exit(1);
             }
 
 
