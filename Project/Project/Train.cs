@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Project
-{
+{ 
     public class Train
     {
-        private List<Station> Stationlist = new List<Station>();//hold info from input file 
-        public Train(String[] lines)
+        private List<Station> Stationlist = new List<Station>();//info from input file 
+        public Train(String[] lines)//constructer 
         {
             //convert input string array into variable or a list of Stations(class) 
             foreach (string line in lines)
@@ -24,6 +24,7 @@ namespace Project
         //runTrain function used to write output msg to console 
         public void runTrain()
         {
+            //following if statments checks for each of the output scenarios then prints stopping sequence description to console then terminates the programs 
             String[] twoStopTest = twoStops();
             if (twoStopTest[0] != "False")
             {
@@ -52,11 +53,12 @@ namespace Project
                 Console.WriteLine("This train runs express from "+ singleExOneStop[1]+" to "+singleExOneStop[3]+", stopping only at "+ singleExOneStop[2]);
                 System.Environment.Exit(1);
             }
-            String[][] comExp = comExpression();
-            int i;
+            //if all above stopping scenarios fail then com Expression return all stopped at station to craft a msg to print to console  
+            String[][] comExp = comExpression();//returns all express stops in a matrix 
+            int i;//hold current express section of train journey
             for (i = 0; i < comExp[0].Length-1; i++)
             {
-                if (i == 0) 
+                if (i == 0) //if first messages removes the word "then"
                 {
                     Console.WriteLine("This train runs express from " + comExp[0][i] + " to " + comExp[2][i] + ", stopping only at " + comExp[1][i]+",");
                 } 
@@ -65,7 +67,14 @@ namespace Project
                     Console.WriteLine("then this train runs express from " + comExp[0][i] + " to " + comExp[2][i] + ", stopping only at " + comExp[1][i]+",");
                 }
             }
-            if (comExp[1][i] == null && comExp[2][i] == null)
+            //last express section may not have 3 stops each of the following if statments handles different combination
+            if (comExp[0][i] == null && comExp[1][i] == null && comExp[2][i] == null) 
+            {
+                //should never be called
+                Console.WriteLine("Error");
+                System.Environment.Exit(1);
+            }
+            else if (comExp[1][i] == null && comExp[2][i] == null)
             {
                 Console.WriteLine("then this train runs express to " + comExp[0][i]);
                 System.Environment.Exit(1);
@@ -77,6 +86,8 @@ namespace Project
             }
             else 
             {
+                //should never be called
+                Console.WriteLine("Error");
                 System.Environment.Exit(1);
             }
 
@@ -90,14 +101,12 @@ namespace Project
         //output - on pass - { FirstStop1, LastStop2 };
         private String[] twoStops()
         {
-            int numStops = 0;
-            String Stop1 = "Error";
-            String Stop2 = "Error";
+            int numStops = 0;//counts stops the train takes 
+            String Stop1 = "Error";//holds first stop name 
+            String Stop2 = "Error";//holds second stop name 
             String[] failTest = { "False" };
             foreach (Station station in Stationlist)
             {
-                if (station.GetStop() == true)
-                {
                     numStops++;
                     if (numStops == 1) {
                         Stop1 = station.GetSName();
@@ -106,7 +115,6 @@ namespace Project
                     {
                         Stop2 = station.GetSName();
                     }
-                }
             }
             if (numStops == 2)
             {
@@ -118,7 +126,10 @@ namespace Project
                 return failTest;
             }
         }
-        private bool allStops() 
+        //check to see if train stops at all stations 
+        //returns true if all station have been stopped at
+        //or false if train skips a station 
+        public bool allStops() 
         {
             foreach (Station station in Stationlist)
             {
@@ -128,7 +139,10 @@ namespace Project
             }
             return true;
         }
-
+        //checks to see if trains stops at all except one stop 
+        //input - void 
+        //output - on fail - "False";
+        //output - on pass - SkippedStation;
         private String allStopsOneExpress()
         {
             int FalseCounter = 0;
@@ -146,6 +160,9 @@ namespace Project
             }
             return "False";
         }
+        //check for - if there are more than 2 stations in a trainstop sequence but only 2 stops 
+        //output - on fail - { "False",};
+        //output - on pass - { "True", Stop1, Stop2 };
         private string[] singleExpress()
         {
             int numStops = 0;
@@ -176,6 +193,9 @@ namespace Project
             String[] FailReturn = { "False",};
             return FailReturn;
         }
+        //checks for - check for a single express section with 1 intermediate stop 
+        //output - on fail - { "False",};
+        //output - on pass - { "True", Stop1, Stop2, Stop3 };
         private string[] singleExpressOneStop()
         {
             int numStops = 0;
@@ -215,6 +235,8 @@ namespace Project
             return FailReturn;
         }
 
+        //function used to organise express sections for description if above checks fail
+        //output - String[][] Return = { Stop1,Stop2,Stop3 };//each stop is array of the corresponding  stops in each express section - eg { Stop1[0],Stop2[0],Stop3[0] } is the first express section 
         private string[][] comExpression()
         {
             int totalNumStations = Stationlist.Count;//total number of stations 

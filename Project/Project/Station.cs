@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
+    //Station class contain information regarding a single station/line in the input file 
     internal class Station
     {
         private String SName;//namne of station 

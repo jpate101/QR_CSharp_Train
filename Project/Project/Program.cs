@@ -7,7 +7,7 @@ namespace Project
     {
         static void Main(string[] args)
         {
-            //get input file name from arguments / check for single input 
+            //check for single input 
             if (args.Length != 1)
                 System.Environment.Exit(1);
             //convert text files to string array seperated by \n in lines variable
