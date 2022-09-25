@@ -24,7 +24,7 @@ namespace Project
         //runTrain function used to write output msg to console 
         public void runTrain()
         {
-            //following if statments checks for each of the output scenarios then prints stopping sequence description to console then terminates the programs 
+            //following if statments checks for each of the output scenarios then prints stopping sequence description to console then terminates the program 
             String[] twoStopTest = twoStops();
             if (twoStopTest[0] != "False")
             {
@@ -129,7 +129,7 @@ namespace Project
         //check to see if train stops at all stations 
         //returns true if all station have been stopped at
         //or false if train skips a station 
-        public bool allStops() 
+        public bool allStops() //convert to private after testing
         {
             foreach (Station station in Stationlist)
             {

@@ -9,7 +9,10 @@ namespace Project
         {
             //check for single input 
             if (args.Length != 1)
-                System.Environment.Exit(1);
+            {
+                Console.WriteLine("incorrect number of arguments");
+               System.Environment.Exit(1);
+            }
             //convert text files to string array seperated by \n in lines variable
             string[] lines = File.ReadAllLines(args[0]);
             //pass lines into train object/class 
